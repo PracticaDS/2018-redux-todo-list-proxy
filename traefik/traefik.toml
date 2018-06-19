@@ -1,0 +1,33 @@
+defaultEntryPoints = ["http"]
+logLevel = "DEBUG"
+
+[traefikLog]
+  filePath = "/traefik.log"
+  format   = "json"
+
+[entryPoints]
+  [entryPoints.http]
+    address = ":80" # will be overriden
+  [entryPoints.webadmin]
+    address = ":8090"
+
+[api]
+  dashboard = true
+  entryPoint = "webadmin"
+
+[frontends]
+  [frontends.frontend1]
+  backend = "backend1"
+  
+  [frontends.frontend2]
+  backend = "backend2"
+    [frontends.frontend2.routes.test_1]
+      rule = "Path:/todos"
+  
+[backends]
+  [backends.backend1]
+    [backends.backend1.servers.server1]
+    url = "https://pdes-2018-todo-list-front.herokuapp.com/"
+  [backends.backend2]
+    [backends.backend2.servers.server1]
+    url = "https://pdes-2018-todo-list-back.herokuapp.com/"
