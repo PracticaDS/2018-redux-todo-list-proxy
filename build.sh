@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build . -t todo-list-proxy
+docker build . -t unqpdes/todo-list-proxy
